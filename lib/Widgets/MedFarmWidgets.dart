@@ -2,7 +2,20 @@ import 'package:flutter/material.dart';
 
 class TextFieldMedFarm {
 
-  Widget label(String text){
+  Widget avatar(String url) {
+    return CircleAvatar(
+      backgroundColor: Colors.transparent,
+      child: SizedBox(
+        width: 60,
+        height: 60,
+        child: ClipOval(
+          child: Image.asset(url),
+        ),
+      ),
+    );
+  }
+
+  Widget label(String text) {
     return Container(
       alignment: Alignment.centerLeft,
       child: Text(
