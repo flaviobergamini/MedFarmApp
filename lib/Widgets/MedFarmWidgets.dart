@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class TextFieldMedFarm {
-
+class MedFarmWidgets {
   Widget avatar(String url) {
-    return CircleAvatar(
-      backgroundColor: Colors.transparent,
-      child: SizedBox(
-        width: 60,
-        height: 60,
-        child: ClipOval(
-          child: Image.asset(url),
+    return SizedBox(
+      width: 75,
+      height: 75,
+      child: ClipRect(
+        child: SvgPicture.asset(
+          url,
         ),
       ),
     );
