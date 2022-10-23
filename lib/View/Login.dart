@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/View/SignUp.dart';
 
-import '../Widgets/TextFieldMedFarm.dart';
+import '../Widgets/MedFarmWidgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    var TextFormMedFarm = new TextFieldMedFarm();
+    var medFarmWidgetsForm = MedFarmWidgets();
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(3, 153, 186, 1),
@@ -48,7 +49,7 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  TextFormMedFarm.label("Usuário"),
+                  medFarmWidgetsForm.label("Usuário"),
                   Radio<TypeUsers>(
                     focusColor: Colors.white70,
                     activeColor: Colors.white70,
@@ -61,7 +62,7 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  TextFormMedFarm.label("Médico"),
+                  medFarmWidgetsForm.label("Médico"),
                   Radio<TypeUsers>(
                     focusColor: Colors.white70,
                     activeColor: Colors.white70,
@@ -74,15 +75,15 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  TextFormMedFarm.label("Farmácia"),
+                  medFarmWidgetsForm.label("Farmácia"),
                 ],
               ),
               Padding(padding: EdgeInsets.all(10)),
-              TextFormMedFarm.label("E-mail"),
-              TextFormMedFarm.textField(emailController),
+              medFarmWidgetsForm.label("E-mail"),
+              medFarmWidgetsForm.textField(emailController),
               Padding(padding: EdgeInsets.all(10)),
-              TextFormMedFarm.label("Senha"),
-              TextFormMedFarm.textField(passwordController),
+              medFarmWidgetsForm.label("Senha"),
+              medFarmWidgetsForm.textField(passwordController),
               Padding(padding: EdgeInsets.all(15)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +115,12 @@ class _LoginState extends State<Login> {
               ),
               Padding(padding: EdgeInsets.all(5)),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUp()),
+                  );
+                },
                 child: Text(
                   "Cadastrar",
                   style: TextStyle(
