@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../Widgets/MedFarmWidgets.dart';
+import 'package:medfarm/View/SignUpClient.dart';
+import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -32,7 +31,12 @@ class _SignUpState extends State<SignUp> {
             ),
             const Padding(padding: EdgeInsets.all(20)),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpClient()),
+                );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
