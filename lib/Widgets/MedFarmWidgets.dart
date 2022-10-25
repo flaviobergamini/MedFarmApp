@@ -25,15 +25,28 @@ class MedFarmWidgets {
   }
 
   Widget textField(TextEditingController textEditingController) {
-    return TextField(
-      controller: textEditingController,
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 3,
-            color: Colors.white70,
+    return Container(
+      child: TextFormField(
+        controller: textEditingController,
+        autofocus: true,
+        obscureText: false,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(
+              color: Color(0x00000000),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(50),
           ),
-          borderRadius: BorderRadius.circular(15.0),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(
+              color: Color(0x00000000),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          filled: true,
+          fillColor: const Color(0xFFD0D6D8),
         ),
       ),
     );

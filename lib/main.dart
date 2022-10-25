@@ -8,8 +8,8 @@ void main() async {
       home: Login(),
       theme: ThemeData(
         hintColor: Colors.white,
-        primaryColor: Color.fromRGBO(3, 153, 186, 1),
-        inputDecorationTheme: InputDecorationTheme(
+        primaryColor: const Color.fromRGBO(3, 153, 186, 1),
+        inputDecorationTheme: const InputDecorationTheme(
           enabledBorder:
               OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
           focusedBorder:
