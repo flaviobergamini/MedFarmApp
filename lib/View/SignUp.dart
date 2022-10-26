@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/View/SignUpClient.dart';
+import 'package:medfarm/View/SignUpDrugstore.dart';
+import 'package:medfarm/View/SingUpDoctor.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class SignUp extends StatefulWidget {
@@ -54,7 +56,12 @@ class _SignUpState extends State<SignUp> {
             ),
             const Padding(padding: EdgeInsets.all(15)),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpDoctor()),
+                );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -72,7 +79,12 @@ class _SignUpState extends State<SignUp> {
             ),
             const Padding(padding: EdgeInsets.all(15)),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpDrugstore()),
+                );
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
