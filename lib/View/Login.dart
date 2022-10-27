@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/View/ForgotPassword.dart';
 import 'package:medfarm/View/SignUp.dart';
 
 import '../Widgets/MedFarmWidgets.dart';
@@ -108,7 +109,12 @@ class _LoginState extends State<Login> {
                   ),
                   Padding(padding: EdgeInsets.only(left: 10)),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const ForgotPassword()),
+                        );
+                      },
                       child: Text("Esqueci minha senha",
                           style: const TextStyle(color: Colors.white)))
                 ],

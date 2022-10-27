@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/View/DrugstoreConsultation.dart';
 import 'package:medfarm/View/Login.dart';
+import 'package:medfarm/View/ForgotPassword.dart';
+
 
 void main() async {
   runApp(
