@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/View/ConsultaFarmaciaWidget.dart';
+import 'package:medfarm/View/DrugstoreConsultation.dart';
 import 'package:medfarm/View/Login.dart';
 
 void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DrugstoreConsultation(),
+      home: Login(),
       theme: ThemeData(
         hintColor: Colors.white,
         primaryColor: const Color.fromRGBO(3, 153, 186, 1),

@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
               medFarmWidgetsForm.textField(emailController),
               Padding(padding: EdgeInsets.all(10)),
               medFarmWidgetsForm.label("Senha"),
-              medFarmWidgetsForm.textField(passwordController),
+              medFarmWidgetsForm.textFieldPassword(passwordController),
               Padding(padding: EdgeInsets.all(15)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

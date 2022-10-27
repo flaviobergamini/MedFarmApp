@@ -62,4 +62,34 @@ class MedFarmWidgets {
       ),
     );
   }
+
+  Widget textFieldPassword(TextEditingController textEditingController) {
+    return Container(
+      child: TextFormField(
+        controller: textEditingController,
+        autofocus: true,
+        obscureText: true,
+        enableSuggestions: false,
+        autocorrect: false,
+        decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(
+              color: Color(0x00000000),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(
+              color: Color(0x00000000),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          filled: true,
+          fillColor: const Color(0xFFD0D6D8),
+        ),
+      ),
+    );
+  }
 }
