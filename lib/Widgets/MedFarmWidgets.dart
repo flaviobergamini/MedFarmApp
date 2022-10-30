@@ -26,12 +26,15 @@ class MedFarmWidgets {
 
   Widget textFieldOutput(String hint, String text){
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(50),
+      child: Container(
+        alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        padding: const EdgeInsets.only(left: 17, right: 17, top: 12, bottom: 12),
+        child: Text(hint + ": " + text , style: const TextStyle(fontSize:16),),
       ),
-      padding: const EdgeInsets.only(left: 17, right: 17, top: 12, bottom: 12),
-      child: Text(hint + ": " + text , style: const TextStyle(fontSize:16),),
     );
   }
 

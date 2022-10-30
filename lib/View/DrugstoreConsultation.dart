@@ -63,7 +63,6 @@ class _DrugstoreConsultationState extends State<DrugstoreConsultation> {
                             "Cidade", "Santa Rita do Sapucaí"),
                         const Padding(padding: EdgeInsets.all(5)),
                         Container(
-                          padding: const EdgeInsets.only(right: 166),
                           child: ValueListenableBuilder(
                             valueListenable: dropValue,
                             builder: (BuildContext context, String value, _) {
