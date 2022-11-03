@@ -50,7 +50,7 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  medFarmWidgetsForm.label("Usuário"),
+                  medFarmWidgetsForm.Label("Usuário"),
                   Radio<TypeUsers>(
                     focusColor: Colors.white70,
                     activeColor: Colors.white70,
@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  medFarmWidgetsForm.label("Médico"),
+                  medFarmWidgetsForm.Label("Médico"),
                   Radio<TypeUsers>(
                     focusColor: Colors.white70,
                     activeColor: Colors.white70,
@@ -76,15 +76,15 @@ class _LoginState extends State<Login> {
                       });
                     },
                   ),
-                  medFarmWidgetsForm.label("Farmácia"),
+                  medFarmWidgetsForm.Label("Farmácia"),
                 ],
               ),
               Padding(padding: EdgeInsets.all(10)),
-              medFarmWidgetsForm.label("E-mail"),
-              medFarmWidgetsForm.textField(emailController),
+              medFarmWidgetsForm.Label("E-mail"),
+              medFarmWidgetsForm.TextFieldMedFarm(emailController),
               Padding(padding: EdgeInsets.all(10)),
-              medFarmWidgetsForm.label("Senha"),
-              medFarmWidgetsForm.textFieldPassword(passwordController),
+              medFarmWidgetsForm.Label("Senha"),
+              medFarmWidgetsForm.TextFieldPassword(passwordController),
               Padding(padding: EdgeInsets.all(15)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

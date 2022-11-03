@@ -51,18 +51,18 @@ class _OrderState extends State<Order> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Padding(padding: EdgeInsets.all(5)),
-                          MedFarmWidgetsForm.textFieldOutput(
+                          MedFarmWidgetsForm.TextFieldOutput(
                               "Nome", name),
                           const Padding(padding: EdgeInsets.all(5)),
-                          MedFarmWidgetsForm.textFieldOutput(
+                          MedFarmWidgetsForm.TextFieldOutput(
                               "Rua", "Brasiliano Salomon"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          MedFarmWidgetsForm.textFieldOutput("Nº", "33"),
+                          MedFarmWidgetsForm.TextFieldOutput("Nº", "33"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          MedFarmWidgetsForm.textFieldOutput(
+                          MedFarmWidgetsForm.TextFieldOutput(
                               "Bairro", "Delcides Teles"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          MedFarmWidgetsForm.textFieldOutput(
+                          MedFarmWidgetsForm.TextFieldOutput(
                               "Cidade", "Santa Rita do Sapucaí"),
                           const Padding(padding: EdgeInsets.all(10)),
                           Container(

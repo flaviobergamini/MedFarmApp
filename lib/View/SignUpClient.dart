@@ -44,71 +44,71 @@ class _SignUpClientState extends State<SignUpClient> {
                       fontWeight: FontWeight.bold),
                 ),
                 Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Nome:"),
-                medFarmWidgetsForm.textField(nameController),
+                medFarmWidgetsForm.Label("Nome:"),
+                medFarmWidgetsForm.TextFieldMedFarm(nameController),
                 Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("CPF:"),
-                medFarmWidgetsForm.textField(cpfController),
-                Padding(padding: EdgeInsets.all(10)),
-                Row(
-                  children: <Widget>[
-                    Flexible(
-                        child: Column(
-                      children: <Widget>[
-                        medFarmWidgetsForm.label("CEP:"),
-                        medFarmWidgetsForm.textField(cepController),
-                      ],
-                    )),
-                    const Padding(padding: EdgeInsets.only(right: 15)),
-                    Flexible(
-                      child: Column(
-                        children: <Widget>[
-                          medFarmWidgetsForm.label("N:"),
-                          medFarmWidgetsForm.textField(numberController),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Rua:"),
-                medFarmWidgetsForm.textField(streetController),
-                Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Bairro:"),
-                medFarmWidgetsForm.textField(districtController),
-                Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Complemento:"),
-                medFarmWidgetsForm.textField(complementController),
+                medFarmWidgetsForm.Label("CPF:"),
+                medFarmWidgetsForm.TextFieldMedFarm(cpfController),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[
                     Flexible(
                         child: Column(
                       children: <Widget>[
-                        medFarmWidgetsForm.label("UF:"),
-                        medFarmWidgetsForm.textField(stateController),
+                        medFarmWidgetsForm.Label("CEP:"),
+                        medFarmWidgetsForm.TextFieldMedFarm(cepController),
                       ],
                     )),
                     const Padding(padding: EdgeInsets.only(right: 15)),
                     Flexible(
                       child: Column(
                         children: <Widget>[
-                          medFarmWidgetsForm.label("Cidade:"),
-                          medFarmWidgetsForm.textField(cityController),
+                          medFarmWidgetsForm.Label("N:"),
+                          medFarmWidgetsForm.TextFieldMedFarm(numberController),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(padding: EdgeInsets.all(10)),
+                medFarmWidgetsForm.Label("Rua:"),
+                medFarmWidgetsForm.TextFieldMedFarm(streetController),
+                Padding(padding: EdgeInsets.all(10)),
+                medFarmWidgetsForm.Label("Bairro:"),
+                medFarmWidgetsForm.TextFieldMedFarm(districtController),
+                Padding(padding: EdgeInsets.all(10)),
+                medFarmWidgetsForm.Label("Complemento:"),
+                medFarmWidgetsForm.TextFieldMedFarm(complementController),
+                Padding(padding: EdgeInsets.all(10)),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                        child: Column(
+                      children: <Widget>[
+                        medFarmWidgetsForm.Label("UF:"),
+                        medFarmWidgetsForm.TextFieldMedFarm(stateController),
+                      ],
+                    )),
+                    const Padding(padding: EdgeInsets.only(right: 15)),
+                    Flexible(
+                      child: Column(
+                        children: <Widget>[
+                          medFarmWidgetsForm.Label("Cidade:"),
+                          medFarmWidgetsForm.TextFieldMedFarm(cityController),
                         ],
                       ),
                     ),
                   ],
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Telefone:"),
-                medFarmWidgetsForm.textField(phoneController),
+                medFarmWidgetsForm.Label("Telefone:"),
+                medFarmWidgetsForm.TextFieldMedFarm(phoneController),
                 const Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("E-mail:"),
-                medFarmWidgetsForm.textField(emailController),
+                medFarmWidgetsForm.Label("E-mail:"),
+                medFarmWidgetsForm.TextFieldMedFarm(emailController),
                 const Padding(padding: EdgeInsets.all(10)),
-                medFarmWidgetsForm.label("Senha:"),
-                medFarmWidgetsForm.textFieldPassword(passwordController),
+                medFarmWidgetsForm.Label("Senha:"),
+                medFarmWidgetsForm.TextFieldPassword(passwordController),
                 const Padding(padding: EdgeInsets.all(15)),
                 ElevatedButton(
                   onPressed: () {},

@@ -14,7 +14,7 @@ class MedFarmWidgets {
     );
   }
 
-  Widget label(String text) {
+  Widget Label(String text) {
     return Container(
       alignment: Alignment.centerLeft,
       child: Text(
@@ -24,7 +24,7 @@ class MedFarmWidgets {
     );
   }
 
-  Widget textFieldOutput(String hint, String text){
+  Widget TextFieldOutput(String hint, String text){
     return Container(
       child: Container(
         alignment: Alignment.centerLeft,
@@ -38,7 +38,7 @@ class MedFarmWidgets {
     );
   }
 
-  Widget textField(TextEditingController textEditingController) {
+  Widget TextFieldMedFarm(TextEditingController textEditingController) {
     return Container(
       child: TextFormField(
         controller: textEditingController,
@@ -66,7 +66,7 @@ class MedFarmWidgets {
     );
   }
 
-  Widget textFieldPassword(TextEditingController textEditingController) {
+  Widget TextFieldPassword(TextEditingController textEditingController) {
     return Container(
       child: TextFormField(
         controller: textEditingController,
@@ -93,6 +93,21 @@ class MedFarmWidgets {
           fillColor: const Color(0xFFD0D6D8),
         ),
       ),
+    );
+  }
+
+  Widget TextLabelBlue(String text){
+    return Text(
+        text,
+        style: TextStyle(
+            color: Color.fromRGBO(3, 133, 173, 1.0)));
+  }
+
+  Widget TitleTextLabelBlue(String text){
+    return Text(
+      text,
+      style: TextStyle(
+          color: Color.fromRGBO(3, 133, 173, 1.0), fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }

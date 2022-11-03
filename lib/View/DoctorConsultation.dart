@@ -94,18 +94,18 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Padding(padding: EdgeInsets.all(5)),
-                          medFarmWidgetsForm.textFieldOutput(
+                          medFarmWidgetsForm.TextFieldOutput(
                               "Nome", "Drogaria do ZÉ"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          medFarmWidgetsForm.textFieldOutput(
+                          medFarmWidgetsForm.TextFieldOutput(
                               "Rua", "Brasiliano Salomon"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          medFarmWidgetsForm.textFieldOutput("Nº", "33"),
+                          medFarmWidgetsForm.TextFieldOutput("Nº", "33"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          medFarmWidgetsForm.textFieldOutput(
+                          medFarmWidgetsForm.TextFieldOutput(
                               "Bairro", "Delcides Teles"),
                           const Padding(padding: EdgeInsets.all(5)),
-                          medFarmWidgetsForm.textFieldOutput(
+                          medFarmWidgetsForm.TextFieldOutput(
                               "Cidade", "Santa Rita do Sapucaí"),
                           const Padding(padding: EdgeInsets.all(5)),
                           Row(
