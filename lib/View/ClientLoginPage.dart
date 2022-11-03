@@ -156,6 +156,7 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 17, right: 17),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const Padding(padding: EdgeInsets.all(5)),
                       medFarmWidgetsForm.TitleTextLabelBlue(
@@ -197,6 +198,7 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 17, right: 17),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const Padding(padding: EdgeInsets.all(5)),
                       medFarmWidgetsForm.TitleTextLabelBlue(
