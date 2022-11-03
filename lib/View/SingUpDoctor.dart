@@ -19,6 +19,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
   final stateController = TextEditingController();
   final cityController = TextEditingController();
   final phoneController = TextEditingController();
+  final specialtyController = TextEditingController();
+  final crmController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -103,6 +105,27 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 const Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("Telefone:"),
                 medFarmWidgetsForm.TextFieldMedFarm(phoneController),
+                const Padding(padding: EdgeInsets.all(10)),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                        child: Column(
+                          children: <Widget>[
+                            medFarmWidgetsForm.Label("Especialidade:"),
+                            medFarmWidgetsForm.TextFieldMedFarm(specialtyController),
+                          ],
+                        )),
+                    const Padding(padding: EdgeInsets.only(right: 15)),
+                    Flexible(
+                      child: Column(
+                        children: <Widget>[
+                          medFarmWidgetsForm.Label("Conselho Regional:"),
+                          medFarmWidgetsForm.TextFieldMedFarm(crmController),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 const Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("E-mail:"),
                 medFarmWidgetsForm.TextFieldMedFarm(emailController),
