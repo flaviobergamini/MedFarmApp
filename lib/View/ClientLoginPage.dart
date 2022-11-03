@@ -15,13 +15,21 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
 
   final cityController = TextEditingController();
 
-  List<String> appointmentsTimeList = [
-    "Rafaela; Remoto; 31/10/2022 08:00",
-    "Rafaela; Remoto; 31/10/2022 09:00",
-    "Rafaela; Remoto; 31/10/2022 11:00",
-    "Rafaela; Remoto; 31/10/2022 12:00",
-    "Rafaela; Remoto; 31/10/2022 13:00",
-    "Rafaela; Remoto; 31/10/2022 14:00"];
+  List<String> ListAppointments = [
+    "Tainângela Ferreira; Remoto; 31/10/2022 08:00",
+    "Tainângela Ferreira; Remoto; 31/10/2022 09:00",
+    "Tainângela Ferreira; Remoto; 31/10/2022 11:00",
+    "Tainângela Ferreira; Remoto; 31/10/2022 12:00",
+    "Tainângela Ferreira; Remoto; 31/10/2022 13:00",
+    "Tainângela Ferreira; Remoto; 31/10/2022 14:00"];
+
+  List<String> ListOrders = [
+    "Samuel; Remoto; 31/10/2022 08:00",
+    "Samuel; Remoto; 31/10/2022 09:00",
+    "Samuel; Remoto; 31/10/2022 11:00",
+    "Samuel; Remoto; 31/10/2022 12:00",
+    "Samuel; Remoto; 31/10/2022 13:00",
+    "Samuel; Remoto; 31/10/2022 14:00"];
 
   @override
   Widget build(BuildContext context) {
@@ -156,13 +164,13 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                         height: 150,
                         child: ListView(
                           children: <Widget>[
-                            for(String appointmentTime in appointmentsTimeList)
+                            for(String appointment in ListAppointments)
                               ListTile(
-                                title: Text(appointmentTime.substring(0, 11),),
-                                subtitle: Text(appointmentTime.substring(11, appointmentTime.length)),
+                                title: Text(appointment.substring(0, appointment.indexOf(';')),),
+                                subtitle: Text(appointment.substring(appointment.indexOf(';') + 1, appointment.length)),
                                 leading: Icon(Icons.access_time_rounded, size: 30,),
                                 onTap: () {
-                                  print("Horário: " + appointmentTime);
+                                  print("Horário: " + appointment);
                                 },
                               ),
                           ],
@@ -197,13 +205,13 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                         height: 150,
                         child: ListView(
                           children: <Widget>[
-                            for(String appointmentTime in appointmentsTimeList)
+                            for(String order in ListOrders)
                               ListTile(
-                                title: Text(appointmentTime.substring(0, 11),),
-                                subtitle: Text(appointmentTime.substring(11, appointmentTime.length)),
+                                title: Text(order.substring(0, order.indexOf(';')),),
+                                subtitle: Text(order.substring(order.indexOf(';') + 1, order.length)),
                                 leading: Icon(Icons.access_time_rounded, size: 30,),
                                 onTap: () {
-                                  print("Horário: " + appointmentTime);
+                                  print("Horário: " + order);
                                 },
                               ),
                           ],
