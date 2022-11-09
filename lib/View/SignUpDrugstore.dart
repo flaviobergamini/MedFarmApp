@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
+import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 
 class SignUpDrugstore extends StatefulWidget {
   const SignUpDrugstore({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _SignUpDrugstoreState extends State<SignUpDrugstore> {
                 medFarmWidgetsForm.TextFieldMedFarm(nameController),
                 Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("CNPJ:"),
-                medFarmWidgetsForm.TextFieldMedFarm(cnpjController),
+                medFarmWidgetsForm.TextFieldMedFarm(CNPJValidator.isValid(cpfController, true)),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[
