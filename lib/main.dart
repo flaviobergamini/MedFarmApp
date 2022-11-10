@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/View/Login.dart';
+import 'package:medfarm/View/SignUpClient.dart';
 
 void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: SignUpClient(),
       theme: ThemeData(
         hintColor: Colors.white,
         primaryColor: const Color.fromRGBO(3, 153, 186, 1),

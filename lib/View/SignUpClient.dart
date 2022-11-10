@@ -49,7 +49,9 @@ class _SignUpClientState extends State<SignUpClient> {
                 medFarmWidgetsForm.TextFieldMedFarm(nameController),
                 Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("CPF:"),
-                medFarmWidgetsForm.TextFieldMedFarm(CPFValidator.isValid(cpfController, true)),
+                medFarmWidgetsForm.TextFieldMedFarm(cpfController),
+                if(CPFValidator.isValid(cpfController.toString(),false))
+                  medFarmWidgetsForm.Label("CPF inaválido!"),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[

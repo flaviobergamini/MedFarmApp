@@ -49,7 +49,9 @@ class _SignUpDrugstoreState extends State<SignUpDrugstore> {
                 medFarmWidgetsForm.TextFieldMedFarm(nameController),
                 Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("CNPJ:"),
-                medFarmWidgetsForm.TextFieldMedFarm(CNPJValidator.isValid(cpfController, true)),
+                medFarmWidgetsForm.TextFieldMedFarm(cnpjController),
+                if(CNPJValidator.isValid(cnpjController.toString(),false))
+                  medFarmWidgetsForm.Label("CNPJ inaválido!"),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[
