@@ -1,8 +1,9 @@
 import 'calculoDigito.dart';
 import 'string_extensions.dart';
+import 'dart:developer';
 
 /// Validar [CNPJ]
-String validarCNPJ(String fsDocto,
+bool validarCNPJ(String fsDocto,
     {bool fsAjustarTamanho = true, fsExibeDigitoCorreto = false}) {
   String dv1, dv2;
   ACBrCalcDigito modulo = ACBrCalcDigito();
@@ -14,12 +15,14 @@ String validarCNPJ(String fsDocto,
         .padLeft(14, '0');
 
   if ((fsDocto.length != 14) || (!fsDocto.strIsNumber())) {
-    return 'CNPJ deve ter 14 dígitos. (Apenas números)';
+    log('CNPJ deve ter 14 dígitos. (Apenas números)');
+    return false;
   }
 
   if (fsDocto == '0'.padLeft(14)) // Prevenção contra 00000000000000
       {
-    return 'CNPJ inválido.';
+    log('CNPJ inválido.');
+    return false;
   }
 
   modulo.calculoPadrao();
@@ -37,7 +40,9 @@ String validarCNPJ(String fsDocto,
     var fsMsgErro = 'CNPJ inválido.';
     if (fsExibeDigitoCorreto)
       fsMsgErro = fsMsgErro + '.. Dígito calculado: ' + fsDigitoCalculado;
-    return fsMsgErro;
+    log(fsMsgErro);
+
+    return false;
   }
-  return '';
+  return true;
 }

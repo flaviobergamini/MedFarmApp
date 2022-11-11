@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/View/SignUpClient.dart';
+import 'package:medfarm/Validation/validator.dart';
 
 void main() async {
+  print(validarCPF('05351151805'));
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -1,7 +1,8 @@
 import 'calculoDigito.dart';
 import 'string_extensions.dart';
+import 'dart:developer';
 
-String validarCPF(String fsDocto,
+bool validarCPF(String fsDocto,
     {bool fsAjustarTamanho = true, fsExibeDigitoCorreto = false}) {
   String dv1, dv2;
   ACBrCalcDigito modulo = ACBrCalcDigito();
@@ -9,12 +10,14 @@ String validarCPF(String fsDocto,
     fsDocto = fsDocto.replaceAll('.', '').replaceAll('-', '').padLeft(11, '0');
 
   if ((fsDocto.length != 11) || (!fsDocto.strIsNumber())) {
-    return 'CPF deve ter 11 dígitos. (Apenas números)';
+    log("CPF deve ter 11 dígitos. (Apenas números)");
+    return false;
   }
 
   if ('11111111111.22222222222.33333333333.44444444444.55555555555.66666666666.77777777777.88888888888.99999999999.00000000000'
       .contains(fsDocto)) {
-    return 'CPF inválido !';
+    log("CPF inválido");
+    return false;
   }
 
   modulo.fsMultIni = 2;
@@ -35,7 +38,9 @@ String validarCPF(String fsDocto,
 
     if (fsExibeDigitoCorreto)
       fsMsgErro = fsMsgErro + '.. Dígito calculado: ' + fsDigitoCalculado;
-    return fsMsgErro;
+    log(fsMsgErro);
+      
+    return false;
   }
-  return '';
+  return true;
 }
