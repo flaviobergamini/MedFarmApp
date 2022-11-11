@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 
-  test('validador de CPF falso', () {
+   test('validador de CPF falso', () {
     expect(validarCPF('05351151805'), false);
   });
 
