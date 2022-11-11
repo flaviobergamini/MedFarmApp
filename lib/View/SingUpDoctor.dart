@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class SignUpDoctor extends StatefulWidget {
   const SignUpDoctor({Key? key}) : super(key: key);
@@ -51,6 +52,8 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("CPF:"),
                 medFarmWidgetsForm.TextFieldMedFarm(cpfController),
+                if(CPFValidator.isValid(cpfController.toString(),false))
+                  medFarmWidgetsForm.Label("CPF inaválido!"),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[
