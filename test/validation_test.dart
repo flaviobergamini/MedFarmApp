@@ -7,12 +7,28 @@ import 'package:medfarm/Validation/validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  print(validarCPF('05351151805'));
-  test('validador', () {
+
+   test('validador de CPF falso', () {
     expect(validarCPF('05351151805'), false);
+  });
+
+  test('validador de CPF verdadeiro', () {
     expect(validarCPF('05351151804'), true);
+  });
+
+  test('validador de CNPJ verdadeiro', () {
     expect(validarCNPJ('08754527000113'), true);
+  });
+
+  test('validador de CNPJ Falso', () {
     expect(validarCNPJ('08754527000114'), false);
   });
 
+  test('validador de CPF Falso com letra', () {
+    expect(validarCNPJ('05F511g18L5'), false);
+  });
+
+  test('validador de CNPJ Falso com letra', () {
+    expect(validarCNPJ('D87S4527F001L4'), false);
+  });
 }
