@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/MedFarmAPI.dart';
+import 'package:medfarm/Controller/MedFarmAPI.dart';
+import 'package:medfarm/View/ClientLoginPage.dart';
+import 'package:medfarm/View/DoctorLoginPage.dart';
+import 'package:medfarm/View/DrugstoreLoginPage.dart';
 import 'package:medfarm/View/ForgotPassword.dart';
 import 'package:medfarm/View/SignUp.dart';
 
@@ -90,7 +95,45 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var MedFarmAPIResponse = new MedFarmAPI();
+
+                       switch(_checkUser){
+                         case TypeUsers.client:
+                           var verify = await MedFarmAPIResponse.login(emailController.text, passwordController.text, 'Client');
+                            print(verify);
+                           if (verify == true){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => const ClientLoginPage()),
+                             );
+                           }
+                         break;
+
+                         case TypeUsers.doctor:
+                           var verify = await MedFarmAPIResponse.login(emailController.text, passwordController.text, 'Doctor');
+
+                           if (verify == true){
+                             Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => const DoctorLoginPage()),
+                             );
+                           }
+                         break;
+
+                         case TypeUsers.drugstore:
+                            var verify = await MedFarmAPIResponse.login(emailController.text, passwordController.text, 'Drugstore');
+
+                            if (verify == true){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DrugstoreLoginPage()),
+                              );
+                            }
+                         break;
+                       }
+
+                    },
                     child: Text(
                       "Entrar",
                       style: TextStyle(

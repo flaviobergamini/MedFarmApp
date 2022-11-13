@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/CoreAPI.dart';
+import 'package:medfarm/Controller/MedFarmAPI.dart';
 import 'package:photo_view/photo_view.dart';
 
 class OrderImage extends StatefulWidget {
@@ -10,7 +10,7 @@ class OrderImage extends StatefulWidget {
 }
 
 class _OrderImageState extends State<OrderImage> {
-  var CoreOrder = CoreAPI();
+  var CoreOrder = MedFarmAPI();
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -9,7 +9,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUpClient(),
+      home: Login(),
       theme: ThemeData(
         hintColor: Colors.white,
         primaryColor: const Color.fromRGBO(3, 153, 186, 1),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/MedFarmAPI.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -14,7 +15,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     var medFarmWidgetsForm = MedFarmWidgets();
-    String name = "Flávio Henrique Mdureira Bergamini";
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
       body: SingleChildScrollView(
@@ -33,23 +33,32 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.transparent,
+                color: Colors.transparent,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(5)),
-                        medFarmWidgetsForm.Label("Entre com o e-mail utilizado no cadastro"),
-                        medFarmWidgetsForm.TextFieldMedFarm(emailController),
-                      ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Padding(padding: EdgeInsets.all(5)),
+                      medFarmWidgetsForm.Label(
+                          "Entre com o e-mail utilizado no cadastro"),
+                      medFarmWidgetsForm.TextFieldMedFarm(emailController),
+                    ],
+                  ),
                   const Padding(padding: EdgeInsets.all(5)),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var MedFarmAPIResponse = new MedFarmAPI();
+
+                      var verify =
+                      await MedFarmAPIResponse.sendEmailForgotPassword(
+                          emailController.text);
+
+                      print(verify);
+                    },
                     child: const Text(
                       "Enviar e-mail",
                       style: TextStyle(
@@ -57,18 +66,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                     style: ButtonStyle(
                       backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Colors.yellow),
+                          const MaterialStatePropertyAll<Color>(Colors.yellow),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                           side:
-                          const BorderSide(width: 3, color: Colors.yellow),
+                              const BorderSide(width: 3, color: Colors.yellow),
                         ),
                       ),
                     ),
                   ),
                   const Padding(padding: EdgeInsets.all(15)),
-                  medFarmWidgetsForm.Label("Um e-mail de redefinição de senha será enviado na caixa de entrada do endereço informado"),
+                  medFarmWidgetsForm.Label(
+                      "Um e-mail de redefinição de senha será enviado na caixa de entrada do endereço informado"),
                 ],
               ),
             ),

@@ -110,4 +110,17 @@ class MedFarmWidgets {
           color: Color.fromRGBO(3, 133, 173, 1.0), fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
+
+  Widget AlertDialogMedFarm(String title, String message){
+    return AlertDialog(
+      title: Text(title),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            Text(message)
+          ],
+        ),
+      ),
+    );
+  }
 }
