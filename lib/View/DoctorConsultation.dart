@@ -67,7 +67,7 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
         child: Column(
           children: [
             const Text(
-              'Farmácia',
+              'Médico',
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: Colors.yellow,
@@ -95,7 +95,7 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
                         children: <Widget>[
                           const Padding(padding: EdgeInsets.all(5)),
                           medFarmWidgetsForm.TextFieldOutput(
-                              "Nome", "Drogaria do ZÉ"),
+                              "Nome", "Clínico Geral José"),
                           const Padding(padding: EdgeInsets.all(5)),
                           medFarmWidgetsForm.TextFieldOutput(
                               "Rua", "Brasiliano Salomon"),

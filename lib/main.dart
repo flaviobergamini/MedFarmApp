@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/View/DoctorClient.dart';
+import 'package:medfarm/View/DoctorConsultation.dart';
+import 'package:medfarm/View/DoctorLoginPage.dart';
+import 'package:medfarm/View/DrugstoreClient.dart';
+import 'package:medfarm/View/DrugstoreLoginPage.dart';
 import 'package:medfarm/View/Login.dart';
+import 'package:medfarm/View/Order.dart';
+import 'package:medfarm/View/PendingMedicalRequests.dart';
 import 'package:medfarm/View/SignUpClient.dart';
 import 'package:medfarm/Validation/validator.dart';
 
