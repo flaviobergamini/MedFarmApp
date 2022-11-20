@@ -66,7 +66,6 @@ class _SignUpState extends State<SignUp> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  //medFarmWidgets.avatar('assets/Medical Doctor.svg'),
                   Container(
                     width: 75,
                     height: 75,
@@ -74,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const Padding(padding: EdgeInsets.only(right: 15)),
                   const Text(
-                    "Médicos",
+                    "Médico",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.white,

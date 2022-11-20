@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/MedFarmAPI.dart';
-import 'package:medfarm/Controller/MedFarmAPI.dart';
+import 'package:medfarm/Controller/Auth.dart';
 import 'package:medfarm/View/ClientLoginPage.dart';
 import 'package:medfarm/View/DoctorLoginPage.dart';
 import 'package:medfarm/View/DrugstoreLoginPage.dart';
@@ -96,7 +95,7 @@ class _LoginState extends State<Login> {
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: () async {
-                      var MedFarmAPIResponse = new MedFarmAPI();
+                      var MedFarmAPIResponse = new Auth();
 
                        switch(_checkUser){
                          case TypeUsers.client:

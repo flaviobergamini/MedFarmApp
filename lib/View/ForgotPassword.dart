@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/MedFarmAPI.dart';
+import 'package:medfarm/Controller/Auth.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -51,7 +51,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   const Padding(padding: EdgeInsets.all(5)),
                   ElevatedButton(
                     onPressed: () async {
-                      var MedFarmAPIResponse = new MedFarmAPI();
+                      var MedFarmAPIResponse = new Auth();
 
                       var verify =
                       await MedFarmAPIResponse.sendEmailForgotPassword(
