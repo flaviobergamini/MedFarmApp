@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:medfarm/Model/ClientModel.dart';
+import 'package:medfarm/Model/DoctorModel.dart';
+import 'package:medfarm/Model/DrugstoreModel.dart';
 import 'package:medfarm/Model/MessageModel.dart';
 import 'package:medfarm/Model/UserLoginModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
-import 'dart:convert';
 
-class MedFarmAPI {
-  String _url = "https://medfarmapi.azurewebsites.net/";
+class Auth {
+  static String _url = "https://medfarmapi.azurewebsites.net/";
   var MedFarmWidgetsAPI = new MedFarmWidgets();
   static String _tokenJWT = "";
-  int _userId = 0;
+  static int _userId = 0;
 
   Future<void> getHomeTestAPI() async {
     try {
@@ -18,6 +20,84 @@ class MedFarmAPI {
       print(e);
     }
   }
+
+  Future<bool> createClient(ClientModel Client) async {
+    try{
+      var url = _url + '/v1/auth/create/client';
+
+      var response = await Dio().post(
+          url,
+          data: Client.toJson()
+      );
+      if (response.statusCode == 201) {
+        return true;
+      }
+      else if (response.statusCode == 401 ||response.statusCode == 404||response.statusCode == 500){
+        var Message = new MessageModel.fromJson(response.data);
+        MedFarmWidgetsAPI.AlertDialogMedFarm(Message.code, Message.message);
+        return false;
+      }
+      else {
+        return false;
+      }
+    }catch(e){
+      MedFarmWidgetsAPI.AlertDialogMedFarm("Falha de Criação de Usuário", e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> createDoctor(DoctorModel Doctor) async {
+    try{
+      var url = _url + '/v1/auth/create/doctor';
+
+      var response = await Dio().post(
+          url,
+          data: Doctor.toJson()
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      }
+      else if (response.statusCode == 401 ||response.statusCode == 404||response.statusCode == 500){
+        var Message = new MessageModel.fromJson(response.data);
+        MedFarmWidgetsAPI.AlertDialogMedFarm(Message.code, Message.message);
+        return false;
+      }
+      else {
+        return false;
+      }
+    }catch(e){
+      MedFarmWidgetsAPI.AlertDialogMedFarm("Falha de Criação de Usuário", e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> createDrugstore(DrugstoreModel Drugstore) async {
+    try{
+      var url = _url + '/v1/auth/create/drugstore';
+
+      var response = await Dio().post(
+          url,
+          data: Drugstore.toJson()
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      }
+      else if (response.statusCode == 401 ||response.statusCode == 404||response.statusCode == 500){
+        var Message = new MessageModel.fromJson(response.data);
+        MedFarmWidgetsAPI.AlertDialogMedFarm(Message.code, Message.message);
+        return false;
+      }
+      else {
+        return false;
+      }
+    }catch(e){
+      MedFarmWidgetsAPI.AlertDialogMedFarm("Falha de Criação de Usuário", e.toString());
+      return false;
+    }
+  }
+
 
   Future<bool> _loginClient(String email, String password) async {
     try{
@@ -65,7 +145,7 @@ class MedFarmAPI {
             "roles": "Doctor"
           }
       );
-
+      print(password);
       if (response.statusCode == 200) {
         var UserLogin = new UserLoginModel.fromJson(response.data);
         _tokenJWT = UserLogin.accessToken;
@@ -165,4 +245,10 @@ class MedFarmAPI {
         "https://firebasestorage.googleapis.com/v0/b/medfarmstorage.appspot.com/o/dataOrdersClient%2F0370c51a-98f0-4337-872b-4ab011efbe60.png?alt=media&token=5227be29-149d-421f-8227-7ef9348a4ef4";
     return url;
   }
+
+  static String get tokenJWT => _tokenJWT;
+
+  static int get userId => _userId;
+
+  static String get url => _url;
 }
