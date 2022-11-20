@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/Auth.dart';
+import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 import 'OrderImage.dart';
@@ -15,7 +15,7 @@ class _OrderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     var MedFarmWidgetsForm = MedFarmWidgets();
-    var CoreOrder = Auth();
+    var CoreOrder = AuthController();
     String name = "Flávio Henrique Mdureira Bergamini";
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),

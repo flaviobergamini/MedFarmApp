@@ -6,7 +6,7 @@ import 'package:medfarm/Model/MessageModel.dart';
 import 'package:medfarm/Model/UserLoginModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
-class Auth {
+class AuthController {
   static String _url = "https://medfarmapi.azurewebsites.net/";
   var MedFarmWidgetsAPI = new MedFarmWidgets();
   static String _tokenJWT = "";

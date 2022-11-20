@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/Auth.dart';
+import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/ClientModel.dart';
 import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
@@ -118,7 +118,7 @@ class _SignUpClientState extends State<SignUpClient> {
                 const Padding(padding: EdgeInsets.all(15)),
                 ElevatedButton(
                   onPressed: () async {
-                    var MedFarmAPIResponse = new Auth();
+                    var MedFarmAPIResponse = new AuthController();
 
                     var Client = new ClientModel(
                         stateController.text,
