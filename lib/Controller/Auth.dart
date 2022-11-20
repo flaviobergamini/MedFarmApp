@@ -7,7 +7,7 @@ import 'dart:convert';
 class MedFarmAPI {
   String _url = "https://medfarmapi.azurewebsites.net/";
   var MedFarmWidgetsAPI = new MedFarmWidgets();
-  String _tokenJWT = "";
+  static String _tokenJWT = "";
   int _userId = 0;
 
   Future<void> getHomeTestAPI() async {
