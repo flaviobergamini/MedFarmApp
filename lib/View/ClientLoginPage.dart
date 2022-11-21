@@ -35,11 +35,16 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
 
   List<String> ListAppointments = [];
 
+
   List<String> ListOrders = [];
 
   @override
   Widget build(BuildContext context) {
     var medFarmWidgetsForm = MedFarmWidgets();
+
+    ListAppointments.clear();
+    ListOrders.clear();
+
     return Scaffold(
         backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
         body: FutureBuilder<List<List<dynamic>>>(
@@ -169,9 +174,6 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                                                   EdgeInsets.only(right: 10)),
                                           ElevatedButton(
                                             onPressed: () async {
-                                              var listAppointment =
-                                                  ClientControllerAPI
-                                                      .getAppointment();
 
                                               ClientSearch.setCity(
                                                   cityController.text);
