@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/Requests/ClientSearchModel.dart';
-import 'package:medfarm/Model/Responses/MessageModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class ClientController {
@@ -9,7 +8,7 @@ class ClientController {
   var MedFarmWidgetsAPI = new MedFarmWidgets();
   var userId = AuthController.userId;
 
-  Future<bool> postSearch(ClientSearchModel Search, String category) async {
+  Future<List<dynamic>> postSearch(ClientSearchModel Search, String category) async {
     try{
       var url = AuthController.url + '/v1/client/search';
 
@@ -24,19 +23,26 @@ class ClientController {
       );
 
       if (response.statusCode == 200) {
-        return true;
+        switch(category){
+          case 'Drugstore':
+            return response.data['drugstores'];
+
+          case 'Doctor':
+            return response.data['doctors'];
+
+          default:
+            List<dynamic> Error = [response.statusCode];
+            return Error;
+        }
       }
-      else if (response.statusCode == 401 ||response.statusCode == 404||response.statusCode == 500){
-        var Message = new MessageModel.fromJson(response.data);
-        MedFarmWidgetsAPI.AlertDialogMedFarm(Message.code, Message.message);
-        return false;
+      else{
+        List<dynamic> Error = [response.statusCode];
+        return Error;
       }
-      else {
-        return false;
-      }
+
     }catch(e){
-      MedFarmWidgetsAPI.AlertDialogMedFarm("Falha no envio da solicitação", e.toString());
-      return false;
+      List<dynamic> Error = ["Falha no envio da solicitação"];
+      return Error;
     }
   }
 
