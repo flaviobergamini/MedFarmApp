@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:medfarm/Model/ClientModel.dart';
 import 'package:medfarm/Model/DoctorModel.dart';
 import 'package:medfarm/Model/DrugstoreModel.dart';
-import 'package:medfarm/Model/MessageModel.dart';
-import 'package:medfarm/Model/UserLoginModel.dart';
+import 'package:medfarm/Model/Responses/MessageModel.dart';
+import 'package:medfarm/Model/Responses/UserLoginModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class AuthController {

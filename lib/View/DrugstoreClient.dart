@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/ClientController.dart';
+import 'package:medfarm/Controller/Statics/ClientSearch.dart';
+import 'package:medfarm/Model/Requests/ClientSearchModel.dart';
 import 'package:medfarm/View/DrugstoreConsultation.dart';
 
 class DrugstoreClient extends StatefulWidget {
@@ -23,6 +26,11 @@ class _DrugstoreClientState extends State<DrugstoreClient> {
 
   @override
   Widget build(BuildContext context) {
+    var ClientControllerAPI = new ClientController();
+
+    var Request = new ClientSearchModel(ClientSearch.getCategory, '', ClientSearch.getCity);
+    var listCategories = ClientControllerAPI.postSearch(Request, ClientSearch.getCategory);
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
       body: SingleChildScrollView(
