@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/ClientController.dart';
 import 'package:medfarm/Controller/Statics/ClientSearch.dart';
 import 'package:medfarm/View/ClientSpecialty.dart';
-import 'package:medfarm/View/DoctorClient.dart';
 import 'package:medfarm/View/DrugstoreClient.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
