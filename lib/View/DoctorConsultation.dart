@@ -4,10 +4,10 @@ import 'package:medfarm/Controller/ClientController.dart';
 import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:medfarm/Model/Requests/ClientAppointmentRequestModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DoctorConsultation extends StatefulWidget {
   const DoctorConsultation({Key? key}) : super(key: key);
-
   @override
   State<DoctorConsultation> createState() => _DoctorConsultationState();
 }
@@ -37,6 +37,15 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
   @override
   Widget build(BuildContext context) {
     var medFarmWidgetsForm = MedFarmWidgets();
+
+    FToast fToast;
+
+    @override
+    void initState() {
+      super.initState();
+      fToast = FToast();
+      fToast.init(context);
+    }
 
     String name;
     String street;
@@ -305,7 +314,17 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
 
                                       var response = await clientControllerAPI.postAppointmentClient(clientAppointmentRequest);
 
-                                      print(response);
+                                      if (response) {
+                                        medFarmWidgetsForm.ToastMedFarm(context,
+                                            "Solicitação Realizada com Sucesso!",
+                                            true);
+                                      }
+                                      else {
+                                        medFarmWidgetsForm.ToastMedFarm(
+                                            context, "Erro na Solicitação",
+                                            false);
+                                      }
+
                                     },
                                     child: const Text(
                                       "Solicitar",
@@ -337,6 +356,7 @@ class _DoctorConsultationState extends State<DoctorConsultation> {
                     );
                   }
               }
-            }));
+            },),);
   }
 }
+
