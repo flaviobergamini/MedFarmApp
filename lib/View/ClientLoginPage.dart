@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/ClientController.dart';
 import 'package:medfarm/Controller/Statics/ClientSearch.dart';
+import 'package:medfarm/View/ClientSpecialty.dart';
 import 'package:medfarm/View/DoctorClient.dart';
 import 'package:medfarm/View/DrugstoreClient.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
@@ -45,6 +46,8 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
     ListAppointments.clear();
     ListOrders.clear();
 
+    cityController.text = '';
+
     return Scaffold(
         backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
         body: FutureBuilder<List<List<dynamic>>>(
@@ -53,7 +56,15 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return Center(child: CircularProgressIndicator());
+                return Center(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(),
+                    Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
+                    Text("Carregando Dados", style: TextStyle(color: Colors.white),)
+                  ],
+                ),);
               default:
                 if (snapshot.hasError) {
                   return Center(
@@ -197,7 +208,7 @@ class _ClientLoginPageState extends State<ClientLoginPage> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const DoctorClient()),
+                                                            const ClientSpecialty()),
                                                   );
                                                   break;
                                               }

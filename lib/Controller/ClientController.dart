@@ -22,6 +22,12 @@ class ClientController {
         })
       );
 
+      print('-------------------------------------------------------------');
+      print(Search.category);
+      print(Search.city);
+      print(Search.specialty);
+      print('-------------------------------------------------------------');
+
       if (response.statusCode == 200) {
         switch(category){
           case 'Drugstore':

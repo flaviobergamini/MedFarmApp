@@ -31,7 +31,15 @@ class _DrugstoreClientState extends State<DrugstoreClient> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
+              return Center(child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
+                  Text("Carregando Dados", style: TextStyle(color: Colors.white),)
+                ],
+              ),);
             default:
               if (snapshot.hasError) {
                 return Center(

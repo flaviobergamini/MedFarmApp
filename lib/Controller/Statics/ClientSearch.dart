@@ -1,6 +1,7 @@
 class ClientSearch{
   static String category = '';
   static String city = '';
+  static String specialty = '';
 
   static void setCategory(String categories){
     category = categories;
@@ -10,7 +11,13 @@ class ClientSearch{
     city = cities;
   }
 
+  static void setSpecialty(String specialties){
+    specialty = specialties;
+  }
+
   static String get getCategory => category;
 
   static String get getCity => city;
+
+  static String get getSpecialty => specialty;
 }
