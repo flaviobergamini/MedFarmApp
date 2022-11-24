@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Controller/DoctorController.dart';
+import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:medfarm/Model/Requests/DoctorAppointmentConfirmedRequestModel.dart';
 import 'package:medfarm/View/PendingMedicalRequests.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
@@ -96,6 +97,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                   pendings.forEach((request) {
                     PendingAppointments.add({
                       'id': request['id'],
+                      'userId': request['userId'],
                       'name': request['name'],
                       'date': request['date'],
                     });
@@ -197,9 +199,8 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                                               size: 30,
                                             ),
                                             onTap: () {
-                                              print("Horário: " +
-                                                  pendingAppointment['date']);
-
+                                              Utils.setClientIdAppointment(pendingAppointment['userId']);
+                                              Utils.setAppointmentPending(pendingAppointment['id']);
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
