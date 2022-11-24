@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/DoctorController.dart';
+import 'package:medfarm/Controller/Statics/Utils.dart';
+import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class PendingMedicalRequests extends StatefulWidget {
   const PendingMedicalRequests({Key? key}) : super(key: key);
@@ -9,60 +11,51 @@ class PendingMedicalRequests extends StatefulWidget {
 }
 
 class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
-  List<Map<String, dynamic>> PendingAppointments = [];
 
   @override
   Widget build(BuildContext context) {
-    var DoctorControllerAPI = new DoctorController();
+    var DoctorControllerAPI = DoctorController();
+    var MedFarmWidgetsForm = new MedFarmWidgets();
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
-      body: FutureBuilder<List<dynamic>>(
-        future: DoctorControllerAPI.getAppointmentPending(),
-          builder: (context, snapshot){
-            switch(snapshot.connectionState){
+      body: FutureBuilder<Map>(
+          future: DoctorControllerAPI.getAppointmentPendingClientById(Utils.getClientIdAppointment),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
               case ConnectionState.none:
               case ConnectionState.waiting:
-                return Center(child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
-                    Text(
-                      "Carregando Dados",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),);
+                return Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(),
+                      Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
+                      Text(
+                        "Carregando Dados",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                );
               default:
-                if(snapshot.hasError){
+                if (snapshot.hasError) {
                   return Center(
-                    child: Text("Erro ao carregar dados da API",
-                      style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 25.0),
+                    child: Text(
+                      "Erro ao carregar dados da API",
+                      style: TextStyle(color: Colors.amber, fontSize: 25.0),
                       textAlign: TextAlign.center,
                     ),
                   );
-                }
-                else{
-                  PendingAppointments.clear();
-                  List<dynamic> pending = snapshot.data!;
-
-                  pending.forEach((request) {
-                    PendingAppointments.add({
-                      'id':request['id'],
-                      'name':request['name'],
-                      'date':request['date']
-                    });
-                  });
-
+                } else {
+                  print(snapshot.data!);
                   return SingleChildScrollView(
                     padding: const EdgeInsets.only(top: 45, bottom: 15),
                     child: Column(
                       children: [
                         const Text(
-                          'Solicitações Pendentes',
+                          'Solicitação Pendente',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: Colors.yellow,
@@ -71,7 +64,8 @@ class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
                         ),
                         const Padding(padding: EdgeInsets.all(15)),
                         Container(
-                          padding: const EdgeInsets.only(left: 17, right: 17, bottom: 17),
+                          padding: const EdgeInsets.only(
+                              left: 17, right: 17, bottom: 17),
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -85,53 +79,82 @@ class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  const Padding(padding: EdgeInsets.all(5)),
                                   Container(
-                                    padding: const EdgeInsets.only(bottom: 17),
-                                    height: 550,
-                                    child: ListView(
+                                    padding: const EdgeInsets.only(
+                                        left: 17, right: 17),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
-                                        for (Map<String, dynamic> appointment in PendingAppointments)
-                                          Row(
-                                            children: <Widget>[
-                                              Flexible(
-                                                flex: 2,
-                                                child: ListTile(
-                                                  title: Text(appointment['name']),
-                                                  subtitle: Text(appointment['date']),
-                                                ),
-                                              ),
-                                              Flexible(
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    DoctorControllerAPI
-                                                        .patchConfirmed(
-                                                        appointment['id']);
-                                                  },
-                                                  child: Text(
-                                                    "Confirmar",
-                                                    style: TextStyle(
-                                                        color:
-                                                        Color.fromRGBO(3, 153, 186, 1),
-                                                        fontSize: 15),
-                                                  ),
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                    MaterialStatePropertyAll<Color>(
-                                                        Colors.yellow),
-                                                    shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                        BorderRadius.circular(30.0),
-                                                        side: BorderSide(
-                                                            width: 3, color: Colors.yellow),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                       const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Nome", snapshot.data!['name']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Rua", snapshot.data!['street']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Nº", '${snapshot.data!['streetNumber']}'),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Bairro", snapshot.data!['district']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Cidade", snapshot.data!['city']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "CEP", snapshot.data!['cep']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Telefone", snapshot.data!['phone']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "E-mail", snapshot.data!['email']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "CPF", snapshot.data!['cpf']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(10)),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            DoctorControllerAPI
+                                          .patchConfirmed(Utils.getAppointmentPending);
+                                          },
+                                          child: Text(
+                                            "Confirmar",
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    3, 153, 186, 1),
+                                                fontSize: 17),
                                           ),
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll<Color>(
+                                                    Colors.yellow),
+                                            shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                                side: BorderSide(
+                                                    width: 3,
+                                                    color: Colors.yellow),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Padding(
+                                            padding: EdgeInsets.all(2)),
                                       ],
                                     ),
                                   ),
@@ -145,8 +168,7 @@ class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
                   );
                 }
             }
-          }
-      ),
+          }),
     );
   }
 }
