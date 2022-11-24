@@ -4,6 +4,7 @@ class Utils {
   static int appointmentPending = 0;
   static int orderPendingId = 0;
   static String imageOrder = '';
+  static int drugstoresId = 0;
 
   static void setDoctorId(int doctorId){
     doctorsId = doctorId;
@@ -25,6 +26,10 @@ class Utils {
     imageOrder = image;
   }
 
+  static void setDrugstoreId(int drugstoreId){
+    drugstoresId = drugstoreId;
+  }
+
   static int get getDoctorId => doctorsId;
 
   static int get getClientIdAppointment => clientIdAppointment;
@@ -34,4 +39,6 @@ class Utils {
   static int get getOrderPending => orderPendingId;
 
   static String get getImageOrder => imageOrder;
+
+  static int get getDrugstoreId => drugstoresId;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/ClientController.dart';
 import 'package:medfarm/Controller/Statics/ClientSearch.dart';
+import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:medfarm/Model/Requests/ClientSearchModel.dart';
 import 'package:medfarm/View/DrugstoreConsultation.dart';
 
@@ -12,7 +13,7 @@ class DrugstoreClient extends StatefulWidget {
 }
 
 class _DrugstoreClientState extends State<DrugstoreClient> {
-  List<String> ListDrugstores = [
+  List<Map> ListDrugstores = [
   ];
 
   @override
@@ -56,12 +57,13 @@ class _DrugstoreClientState extends State<DrugstoreClient> {
                 List<dynamic> drugstores = snapshot.data!;
 
                 drugstores.forEach((drugstore) {
-                  String name = drugstore['name'];
-                  String district = drugstore['district'];
-                  String street = drugstore['street'];
-                  int streetNumber = drugstore['streetNumber'];
-
-                  ListDrugstores.add('$name; $district; $street; $streetNumber');
+                  ListDrugstores.add({
+                    'id':drugstore['id'],
+                    'name':drugstore['name'],
+                    'district':drugstore['district'],
+                    'street':drugstore['street'],
+                    'streetNumber':drugstore['streetNumber']
+                  });
 
                 });
 
@@ -100,27 +102,22 @@ class _DrugstoreClientState extends State<DrugstoreClient> {
                                   height: 550,
                                   child: ListView(
                                     children: <Widget>[
-                                      for (String drugstore in ListDrugstores)
+                                      for (Map drugstore in ListDrugstores)
                                         ListTile(
-                                          title: Text(
-                                            drugstore.substring(
-                                                0, drugstore.indexOf(';')),
-                                          ),
-                                          subtitle: Text(drugstore.substring(
-                                              drugstore.indexOf(';') + 1,
-                                              drugstore.length)),
+                                          title: Text(drugstore['name']),
+                                          subtitle: Text('${drugstore['district']}; ${drugstore['street']}; ${drugstore['streetNumber']}'),
                                           leading: Icon(
                                             Icons.add_business,
                                             size: 30,
                                           ),
                                           onTap: () {
-                                            print("Horário: " + drugstore);
+                                            Utils.setDrugstoreId(drugstore['id']);
 
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      DrugstoreConsultation()),
+                                                      DrugstoreConsultation(),),
                                             );
                                           },
                                         ),

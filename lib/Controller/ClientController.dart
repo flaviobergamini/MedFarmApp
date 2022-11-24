@@ -179,4 +179,29 @@ class ClientController {
       return false;
     }
   }
+
+  Future<Map> getDrugstoreById(int id) async {
+    try{
+      var url = AuthController.url + '/v1/client/drugstore/$id';
+
+      var response = await Dio().get(
+          url,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+            "Bearer $token",
+          })
+      );
+
+      if (response.statusCode == 200) {
+        return response.data['drugstore'];
+      }
+      else{
+        return response.data;
+      }
+
+    }catch(e){
+      return {'Error': 'Falha no envio da solicitação'};
+    }
+  }
 }
