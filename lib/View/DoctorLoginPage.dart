@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Controller/DoctorController.dart';
 import 'package:medfarm/Model/Requests/DoctorAppointmentConfirmedRequestModel.dart';
+import 'package:medfarm/View/PendingMedicalRequests.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class DoctorLoginPage extends StatefulWidget {
@@ -78,10 +79,15 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                   List<dynamic> confirmeds = snapshot.data![0];
 
                   confirmeds.forEach((confirmed) {
+                    var remote = 'Presencial';
+
+                    if (confirmed['remote'])
+                      remote = 'Remoto';
+
                     ConfirmedAppointments.add({
                       'name': confirmed['name'],
                       'date': confirmed['date'],
-                      'remote': confirmed['remote']
+                      'remote': remote
                     });
                   });
 
@@ -138,7 +144,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                                             in ConfirmedAppointments)
                                           ListTile(
                                             title: Text(appointment['name']),
-                                            subtitle: Text('${appointment['remote']}, ${appointment['date']}'),
+                                            subtitle: Text('${appointment['remote']}; ${appointment['date']}'),
                                             leading: Icon(
                                               Icons.person,
                                               size: 30,
@@ -193,6 +199,13 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                                             onTap: () {
                                               print("Horário: " +
                                                   pendingAppointment['date']);
+
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PendingMedicalRequests()),
+                                              );
                                             },
                                           ),
                                       ],
