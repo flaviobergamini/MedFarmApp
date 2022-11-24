@@ -62,4 +62,28 @@ class DoctorController{
       return Error;
     }
   }
+
+  Future<bool> patchConfirmed(int clientId) async {
+    try {
+      var url = AuthController.url + '/v1/appointment/doctor/requests/$clientId';
+
+      var response = await Dio().patch(
+          url,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+            "Bearer $token",
+          })
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }catch(e){
+      return false;
+    }
+  }
 }

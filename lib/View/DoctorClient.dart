@@ -25,6 +25,7 @@ class _DoctorClientState extends State<DoctorClient> {
 
   @override
   Widget build(BuildContext context) {
+    initState();
     var ClientControllerAPI = new ClientController();
 
     var Request = new ClientSearchModel(ClientSearch.getCategory,
