@@ -18,14 +18,7 @@ class _DoctorClientState extends State<DoctorClient> {
   List<int> ListIds = [];
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    initState();
     var ClientControllerAPI = new ClientController();
 
     var Request = new ClientSearchModel(ClientSearch.getCategory,
