@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Controller/ClientController.dart';
+import 'package:medfarm/Controller/ImageOrderController.dart';
 import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
@@ -21,7 +25,6 @@ class _DrugstoreConsultationState extends State<DrugstoreConsultation> {
     var ClientControllerAPI = new ClientController();
     var medFarmWidgetsForm = MedFarmWidgets();
 
-    String name = "Flávio Henrique Mdureira Bergamini";
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
@@ -142,7 +145,22 @@ class _DrugstoreConsultationState extends State<DrugstoreConsultation> {
                               ),
                               const Padding(padding: EdgeInsets.all(5)),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  var camera = ImageOrderController();
+
+                                  var image = await camera.getImage();
+                                  if (image == null) {
+                                    medFarmWidgetsForm.ToastMedFarm(context, "Imagem não anexada", false);
+                                  }
+                                  else{
+                                    bool verify = await ClientControllerAPI.postImageOrderClient(image);
+
+                                    if(verify == false)
+                                      medFarmWidgetsForm.ToastMedFarm(context, "Falha no envio da imagem", false);
+                                    else
+                                      medFarmWidgetsForm.ToastMedFarm(context, "Imagem anexada com sucesso", true);
+                                  }
+                                },
                                 child: const Text(
                                   "Anexar Receita",
                                   style: TextStyle(
@@ -166,7 +184,17 @@ class _DrugstoreConsultationState extends State<DrugstoreConsultation> {
                         ),
                         const Padding(padding: EdgeInsets.all(5)),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            DateTime date = new DateTime.now();
+                            String dateNow = '${date.year}-${date.month}-${date.day}';
+
+                            var verify = await ClientControllerAPI.postOrderClient(AuthController.userId, Utils.getDrugstoreId, dateNow, dropValue.value);
+
+                            if(verify == false)
+                              medFarmWidgetsForm.ToastMedFarm(context, "Falha na solicitação", false);
+                            else
+                              medFarmWidgetsForm.ToastMedFarm(context, "Solicitação realizada com sucesso", true);
+                          },
                           child: const Text(
                             "Solicitar",
                             style: TextStyle(

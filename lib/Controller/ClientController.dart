@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/Requests/ClientAppointmentRequestModel.dart';
 import 'package:medfarm/Model/Requests/ClientSearchModel.dart';
+import 'package:medfarm/Model/Requests/OrderClientRequestModel.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class ClientController {
@@ -202,6 +205,86 @@ class ClientController {
 
     }catch(e){
       return {'Error': 'Falha no envio da solicitação'};
+    }
+  }
+
+  Future<bool> postImageOrderClient(File image) async {
+    try{
+      var url = AuthController.url + '/v1/order/client/upload/image';
+
+      String fileName = image.path.split('/').last;
+
+      FormData formData = FormData.fromMap({
+        'formFile': await MultipartFile.fromFile(image.path, filename: fileName),
+      });
+
+      var response = await Dio().post(
+          url,
+          data: formData,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+            "Bearer $token",
+          })
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+
+      }
+      else{
+        return false;
+      }
+
+    }catch(e){
+      return false;
+    }
+  }
+
+
+  Future<bool> postOrderClient(int clientId, int drugstoreId, String date, String payment) async {
+    try{
+      var url = AuthController.url + '/v1/client/$clientId';
+
+      var response = await Dio().get(
+          url,
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+            "Bearer $token",
+          })
+      );
+
+      if (response.statusCode != 200)
+        return false;
+
+      Map client = response.data['client'];
+
+      OrderClientResquestModel OrderClient = new OrderClientResquestModel(client['state'], client['city'], client['complement'], client['district'], client['cep'], client['street'], client['streetNumber'], clientId, drugstoreId, date, payment);
+      print(OrderClient.toJson());
+
+      var urlFinal = AuthController.url + '/v1/order/client';
+
+      var responseFinal = await Dio().post(
+          urlFinal,
+          data: OrderClient.toJson(),
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+            "Bearer $token",
+          })
+      );
+
+      if (responseFinal.statusCode == 201) {
+        return true;
+
+      }
+      else{
+        return false;
+      }
+
+    }catch(e){
+      return false;
     }
   }
 }
