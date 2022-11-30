@@ -31,4 +31,12 @@ void main() {
   test('validador de CNPJ Falso com letra', () {
     expect(validarCNPJ('D87S4527F001L4'), false);
   });
+
+   test('validador de CPF verdadeiro com pontos', () {
+     expect(validarCPF('093.971.430-26'), true);
+   });
+
+   test('validador de CNPJ verdadeiro com pontos', () {
+     expect(validarCNPJ('03.215.268/0001-39'), true);
+   });
 }
