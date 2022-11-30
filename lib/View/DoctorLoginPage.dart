@@ -201,6 +201,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
                                             onTap: () {
                                               Utils.setClientIdAppointment(pendingAppointment['userId']);
                                               Utils.setAppointmentPending(pendingAppointment['id']);
+
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(

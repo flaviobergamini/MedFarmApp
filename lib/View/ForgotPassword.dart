@@ -57,7 +57,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       await MedFarmAPIResponse.sendEmailForgotPassword(
                           emailController.text);
 
-                      print(verify);
+                      if (verify == true){
+                        medFarmWidgetsForm.ToastMedFarm(
+                            context, "E-mail enviado!",
+                            true);
+                      }
+                      else {
+                      medFarmWidgetsForm.ToastMedFarm(
+                      context, "falha no envio do e-mail",
+                      false);
+                      }
                     },
                     child: const Text(
                       "Enviar e-mail",

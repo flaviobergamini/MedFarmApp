@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/DrugstoreController.dart';
 import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:medfarm/View/Order.dart';
+import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class DrugstoreLoginPage extends StatefulWidget {
   const DrugstoreLoginPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class DrugstoreLoginPage extends StatefulWidget {
 }
 
 var DrugstoreControllerAPI = new DrugstoreController();
+var MedFarmWidgetsForm = new MedFarmWidgets();
 
 class _DrugstoreLoginPageState extends State<DrugstoreLoginPage> {
   List<Map> PendingOrders = [];
@@ -106,18 +108,23 @@ class _DrugstoreLoginPageState extends State<DrugstoreLoginPage> {
                                               ),
                                               Flexible(
                                                 child: ElevatedButton(
-                                                  onPressed: () {
+                                                  onPressed: () async {
                                                     PendingOrders.remove(order);
 
                                                     Utils.setOrderPending(order['id']);
 
-                                                    DrugstoreControllerAPI.patchConfirmed(order['id']);
-
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (context) => Order()),
-                                                    );
-                                                  },
+                                                    var verify = await DrugstoreControllerAPI.patchConfirmed(order['id']);
+                                                    if (verify == false){
+                                                      MedFarmWidgetsForm.ToastMedFarm(
+                                                          context, "Falha na confirmação",
+                                                          false);
+                                                    }
+                                                    else
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(builder: (context) => Order()),
+                                                      );
+                                                    },
                                                   child: Text(
                                                     "Confirmar",
                                                     style: TextStyle(

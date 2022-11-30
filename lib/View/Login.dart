@@ -100,12 +100,17 @@ class _LoginState extends State<Login> {
                        switch(_checkUser){
                          case TypeUsers.client:
                            var verify = await MedFarmAPIResponse.login(emailController.text, passwordController.text, 'Client');
-                            print(verify);
+
                            if (verify == true){
                              Navigator.push(
                                context,
                                MaterialPageRoute(builder: (context) => const ClientLoginPage()),
                              );
+                           }
+                           else {
+                             medFarmWidgetsForm.ToastMedFarm(
+                                 context, "Login inválido",
+                                 false);
                            }
                          break;
 
@@ -118,6 +123,11 @@ class _LoginState extends State<Login> {
                                MaterialPageRoute(builder: (context) => const DoctorLoginPage()),
                              );
                            }
+                           else {
+                             medFarmWidgetsForm.ToastMedFarm(
+                                 context, "Login inválido",
+                                 false);
+                           }
                          break;
 
                          case TypeUsers.drugstore:
@@ -128,6 +138,11 @@ class _LoginState extends State<Login> {
                                 context,
                                 MaterialPageRoute(builder: (context) => const DrugstoreLoginPage()),
                               );
+                            }
+                            else {
+                              medFarmWidgetsForm.ToastMedFarm(
+                                  context, "Login inválido",
+                                  false);
                             }
                          break;
                        }

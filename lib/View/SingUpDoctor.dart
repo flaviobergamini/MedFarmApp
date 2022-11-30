@@ -163,13 +163,16 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
 
                     var verify = await MedFarmAPIResponse.createDoctor(Doctor);
 
-                    print(verify);
-
                     if (verify == true) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const Login()),
                       );
+                    }
+                    else{
+                      medFarmWidgetsForm.ToastMedFarm(
+                          context, "Falha no cadastro",
+                          false);
                     }
                   },
                   child: const Text(

@@ -127,9 +127,20 @@ class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
                                         const Padding(
                                             padding: EdgeInsets.all(10)),
                                         ElevatedButton(
-                                          onPressed: () {
-                                            DoctorControllerAPI
+                                          onPressed: () async {
+                                            var verify = await DoctorControllerAPI
                                           .patchConfirmed(Utils.getAppointmentPending);
+
+                                            if (verify == true){
+                                              MedFarmWidgetsForm.ToastMedFarm(
+                                                  context, "Consulta confirmada¹",
+                                                  true);
+                                            }
+                                            else {
+                                              MedFarmWidgetsForm.ToastMedFarm(
+                                                  context, "Falha na confirmação",
+                                                  false);
+                                            }
                                           },
                                           child: Text(
                                             "Confirmar",

@@ -145,6 +145,11 @@ class _SignUpDrugstoreState extends State<SignUpDrugstore> {
                         MaterialPageRoute(builder: (context) => const Login()),
                       );
                     }
+                    else{
+                      medFarmWidgetsForm.ToastMedFarm(
+                          context, "Falha no cadastro",
+                          false);
+                    }
                   },
                   child: const Text(
                     "Cadastrar",
