@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/ClientModel.dart';
+import 'package:medfarm/Validation/validaCPF.dart';
 import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
@@ -135,18 +136,29 @@ class _SignUpClientState extends State<SignUpClient> {
                         passwordController.text,
                         "Client");
 
-                    var verify = await MedFarmAPIResponse.createClient(Client);
+                    var verifyCpf = validarCPF(cpfController.text);
 
-                    if (verify == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Login()),
-                      );
-                    }
-                    else{
+                    if (verifyCpf == false){
                       medFarmWidgetsForm.ToastMedFarm(
-                          context, "Falha no cadastro",
+                          context, "CPF inválido",
                           false);
+                    }
+                    else {
+                      var verify = await MedFarmAPIResponse.createClient(
+                          Client);
+
+                      if (verify == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const Login()),
+                        );
+                      }
+                      else {
+                        medFarmWidgetsForm.ToastMedFarm(
+                            context, "Falha no cadastro",
+                            false);
+                      }
                     }
                   },
                   child: const Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/DoctorModel.dart';
+import 'package:medfarm/Validation/validaCPF.dart';
 import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
@@ -161,18 +162,29 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                         passwordController.text,
                         "Doctor");
 
-                    var verify = await MedFarmAPIResponse.createDoctor(Doctor);
+                    var verifyCpf = validarCPF(cpfController.text);
 
-                    if (verify == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Login()),
-                      );
-                    }
-                    else{
+                    if (verifyCpf == false){
                       medFarmWidgetsForm.ToastMedFarm(
-                          context, "Falha no cadastro",
+                          context, "CPF inválido",
                           false);
+                    }
+                    else {
+                      var verify = await MedFarmAPIResponse.createDoctor(
+                          Doctor);
+
+                      if (verify == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const Login()),
+                        );
+                      }
+                      else {
+                        medFarmWidgetsForm.ToastMedFarm(
+                            context, "Falha no cadastro",
+                            false);
+                      }
                     }
                   },
                   child: const Text(

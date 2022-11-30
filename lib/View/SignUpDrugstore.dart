@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medfarm/Controller/AuthController.dart';
 import 'package:medfarm/Model/DrugstoreModel.dart';
+import 'package:medfarm/Validation/validaCNPJ.dart';
 import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
@@ -135,20 +136,29 @@ class _SignUpDrugstoreState extends State<SignUpDrugstore> {
                         passwordController.text,
                         "Drugstore");
 
-                    var verify = await MedFarmAPIResponse.createDrugstore(Drugstore);
+                    var verifyCnpj = validarCNPJ(cnpjController.text);
 
-                    print(verify);
-
-                    if (verify == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Login()),
-                      );
-                    }
-                    else{
+                    if (verifyCnpj == false){
                       medFarmWidgetsForm.ToastMedFarm(
-                          context, "Falha no cadastro",
+                          context, "CNPJ inválido",
                           false);
+                    }
+                    else {
+                      var verify = await MedFarmAPIResponse.createDrugstore(
+                          Drugstore);
+
+                      if (verify == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const Login()),
+                        );
+                      }
+                      else {
+                        medFarmWidgetsForm.ToastMedFarm(
+                            context, "Falha no cadastro",
+                            false);
+                      }
                     }
                   },
                   child: const Text(
