@@ -23,7 +23,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> {
   Future<List<List<dynamic>>> getLists() async {
     DateTime date = DateTime.now();
 
-    var appointmentConfirmed = new DoctorAppointmentConfirmedRequestModel(AuthController.userId, '${date.year}-${date.month}-${date.day}');
+    var appointmentConfirmed = new DoctorAppointmentConfirmedRequestModel(AuthController.userId, '2022-12-01');
 
     var appointmentsConfirmed = await DoctorControllerAPI.getAppointmentConfirmed(
         appointmentConfirmed);

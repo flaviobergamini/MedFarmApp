@@ -180,11 +180,6 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                               context) => const Login()),
                         );
                       }
-                      else {
-                        medFarmWidgetsForm.ToastMedFarm(
-                            context, "Falha no cadastro",
-                            false);
-                      }
                     }
                   },
                   child: const Text(

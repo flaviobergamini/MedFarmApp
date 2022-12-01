@@ -186,7 +186,7 @@ class _DrugstoreConsultationState extends State<DrugstoreConsultation> {
                         ElevatedButton(
                           onPressed: () async {
                             DateTime date = new DateTime.now();
-                            String dateNow = '${date.year}-${date.month}-${date.day}';
+                            String dateNow = '2022-12-01';
 
                             var verify = await ClientControllerAPI.postOrderClient(AuthController.userId, Utils.getDrugstoreId, dateNow, dropValue.value);
 
