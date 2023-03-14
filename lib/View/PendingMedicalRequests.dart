@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/DoctorController.dart';
+import 'package:medfarm/Controller/Statics/Utils.dart';
+import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 
 class PendingMedicalRequests extends StatefulWidget {
   const PendingMedicalRequests({Key? key}) : super(key: key);
@@ -8,113 +11,175 @@ class PendingMedicalRequests extends StatefulWidget {
 }
 
 class _PendingMedicalRequestsState extends State<PendingMedicalRequests> {
-  List<String> PendingAppointments = [
-    "Flávio Henrique Madureira Bergamini; Remoto; 31/10/2022 08:00",
-    "Tainângela Ferreira; Remoto; 31/10/2022 09:00",
-    "Tainângela Ferreira; Remoto; 31/10/2022 11:00",
-    "Tainângela Ferreira; Remoto; 31/10/2022 12:00",
-    "Tainângela Ferreira; Remoto; 31/10/2022 13:00",
-    "Tainângela Ferreira; Remoto; 31/10/2022 14:00",
-    "Flávio Henrique Madureira Bergamini; Remoto; 31/10/2022 15:00",
-    "Flávio Henrique Madureira Bergamini; Remoto; 31/10/2022 16:00",
-    "Flávio Henrique Madureira Bergamini; Remoto; 31/10/2022 17:00"
-  ];
 
   @override
   Widget build(BuildContext context) {
+    var DoctorControllerAPI = DoctorController();
+    var MedFarmWidgetsForm = new MedFarmWidgets();
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(3, 153, 186, 1),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 45, bottom: 15),
-        child: Column(
-          children: [
-            const Text(
-              'Solicitações Pendentes',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Colors.yellow,
-                fontSize: 25,
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(15)),
-            Container(
-              padding: const EdgeInsets.only(left: 17, right: 17, bottom: 17),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                ),
-                child: Container(
-                  alignment: Alignment.centerLeft,
+      body: FutureBuilder<Map>(
+          future: DoctorControllerAPI.getAppointmentPendingClientById(Utils.getClientIdAppointment),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Padding(padding: EdgeInsets.all(5)),
-                      Container(
-                        padding: const EdgeInsets.only(bottom: 17),
-                        height: 550,
-                        child: ListView(
-                          children: <Widget>[
-                            for (String appointment in PendingAppointments)
-                              Row(
+                      CircularProgressIndicator(),
+                      Padding(padding: EdgeInsets.only(top: 5, bottom: 5)),
+                      Text(
+                        "Carregando Dados",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                );
+              default:
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      "Erro ao carregar dados da API",
+                      style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                } else {
+                  print(snapshot.data!);
+                  return SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 45, bottom: 15),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Solicitação Pendente',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 25,
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(15)),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              left: 17, right: 17, bottom: 17),
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(25),
+                              ),
+                            ),
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Flexible(
-                                    flex: 2,
-                                    child: ListTile(
-                                      title: Text(
-                                        appointment.substring(
-                                            0, appointment.indexOf(';')),
-                                      ),
-                                      subtitle: Text(appointment.substring(
-                                          appointment.indexOf(';') + 1,
-                                          appointment.length)),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        print("Horário: " + appointment);
-                                        print(
-                                            MediaQuery.of(context).size.height);
-                                      },
-                                      child: Text(
-                                        "Confirmar",
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(3, 153, 186, 1),
-                                            fontSize: 15),
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStatePropertyAll<Color>(
-                                                Colors.yellow),
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            side: BorderSide(
-                                                width: 3, color: Colors.yellow),
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 17, right: 17),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                       const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Nome", snapshot.data!['name']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Rua", snapshot.data!['street']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Nº", '${snapshot.data!['streetNumber']}'),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Bairro", snapshot.data!['district']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Cidade", snapshot.data!['city']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "CEP", snapshot.data!['cep']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "Telefone", snapshot.data!['phone']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "E-mail", snapshot.data!['email']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(5)),
+                                        MedFarmWidgetsForm.TextFieldOutput(
+                                            "CPF", snapshot.data!['cpf']),
+                                        const Padding(
+                                            padding: EdgeInsets.all(10)),
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            var verify = await DoctorControllerAPI
+                                          .patchConfirmed(Utils.getAppointmentPending);
+
+                                            if (verify == true){
+                                              MedFarmWidgetsForm.ToastMedFarm(
+                                                  context, "Consulta confirmada¹",
+                                                  true);
+                                            }
+                                            else {
+                                              MedFarmWidgetsForm.ToastMedFarm(
+                                                  context, "Falha na confirmação",
+                                                  false);
+                                            }
+                                          },
+                                          child: Text(
+                                            "Confirmar",
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    3, 153, 186, 1),
+                                                fontSize: 17),
+                                          ),
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll<Color>(
+                                                    Colors.yellow),
+                                            shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                                side: BorderSide(
+                                                    width: 3,
+                                                    color: Colors.yellow),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        const Padding(
+                                            padding: EdgeInsets.all(2)),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                      ],
+                    ),
+                  );
+                }
+            }
+          }),
     );
   }
 }

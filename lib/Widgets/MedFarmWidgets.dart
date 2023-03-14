@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MedFarmWidgets {
   Widget avatar(String url) {
@@ -109,5 +110,76 @@ class MedFarmWidgets {
       style: TextStyle(
           color: Color.fromRGBO(3, 133, 173, 1.0), fontSize: 20, fontWeight: FontWeight.bold),
     );
+  }
+
+  Widget AlertDialogMedFarm(String title, String message){
+    return AlertDialog(
+      title: Text(title),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            Text(message)
+          ],
+        ),
+      ),
+    );
+  }
+
+  void ToastMedFarm(var context, String message, bool validation) {
+    FToast fToast;
+
+    fToast = FToast();
+    fToast.init(context);
+
+    Widget toastOK = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.green,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(message),
+        ],
+      ),
+    );
+
+    Widget toastError = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.red,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(message),
+        ],
+      ),
+    );
+
+    if(validation){
+      fToast.showToast(
+        child: toastOK,
+        gravity: ToastGravity.BOTTOM,
+        toastDuration: Duration(seconds: 5),
+      );
+    }
+    else{
+      fToast.showToast(
+        child: toastError,
+        gravity: ToastGravity.BOTTOM,
+        toastDuration: Duration(seconds: 5),
+      );
+    }
   }
 }

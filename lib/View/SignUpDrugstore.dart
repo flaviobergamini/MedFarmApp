@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/AuthController.dart';
+import 'package:medfarm/Model/DrugstoreModel.dart';
+import 'package:medfarm/Validation/validaCNPJ.dart';
+import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
 
@@ -114,7 +118,44 @@ class _SignUpDrugstoreState extends State<SignUpDrugstore> {
                 medFarmWidgetsForm.TextFieldPassword(passwordController),
                 const Padding(padding: EdgeInsets.all(15)),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var MedFarmAPIResponse = new AuthController();
+
+                    var Drugstore = new DrugstoreModel(
+                        stateController.text,
+                        cityController.text,
+                        complementController.text,
+                        districtController.text,
+                        cepController.text,
+                        streetController.text,
+                        int.parse(numberController.text),
+                        nameController.text,
+                        emailController.text,
+                        phoneController.text,
+                        cnpjController.text,
+                        passwordController.text,
+                        "Drugstore");
+
+                    var verifyCnpj = validarCNPJ(cnpjController.text);
+
+                    if (verifyCnpj == false){
+                      medFarmWidgetsForm.ToastMedFarm(
+                          context, "CNPJ inválido",
+                          false);
+                    }
+                    else {
+                      var verify = await MedFarmAPIResponse.createDrugstore(
+                          Drugstore);
+
+                      if (verify == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const Login()),
+                        );
+                      }
+                    }
+                  },
                   child: const Text(
                     "Cadastrar",
                     style: TextStyle(

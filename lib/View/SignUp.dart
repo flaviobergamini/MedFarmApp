@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medfarm/View/SignUpClient.dart';
 import 'package:medfarm/View/SignUpDrugstore.dart';
 import 'package:medfarm/View/SingUpDoctor.dart';
@@ -65,10 +66,14 @@ class _SignUpState extends State<SignUp> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  medFarmWidgets.avatar('assets/Doctor.svg'),
+                  Container(
+                    width: 75,
+                    height: 75,
+                    child: Image.asset('assets/Medical Doctor.png'),
+                  ),
                   const Padding(padding: EdgeInsets.only(right: 15)),
                   const Text(
-                    "Médicos",
+                    "Médico",
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.white,

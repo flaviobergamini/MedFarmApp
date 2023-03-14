@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medfarm/Controller/CoreAPI.dart';
+import 'package:medfarm/Controller/AuthController.dart';
+import 'package:medfarm/Controller/Statics/Utils.dart';
 import 'package:photo_view/photo_view.dart';
 
 class OrderImage extends StatefulWidget {
@@ -10,12 +11,12 @@ class OrderImage extends StatefulWidget {
 }
 
 class _OrderImageState extends State<OrderImage> {
-  var CoreOrder = CoreAPI();
+  var CoreOrder = AuthController();
   @override
   Widget build(BuildContext context) {
     return Container(
         child: PhotoView(
-          imageProvider: NetworkImage(CoreOrder.getOrderImage()),
+          imageProvider: NetworkImage(Utils.getImageOrder),
         )
     );
   }

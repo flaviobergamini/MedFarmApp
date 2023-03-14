@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medfarm/Controller/AuthController.dart';
+import 'package:medfarm/Model/DoctorModel.dart';
+import 'package:medfarm/Validation/validaCPF.dart';
+import 'package:medfarm/View/Login.dart';
 import 'package:medfarm/Widgets/MedFarmWidgets.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
@@ -52,18 +56,18 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 Padding(padding: EdgeInsets.all(10)),
                 medFarmWidgetsForm.Label("CPF:"),
                 medFarmWidgetsForm.TextFieldMedFarm(cpfController),
-                if(CPFValidator.isValid(cpfController.toString(),false))
+                if (CPFValidator.isValid(cpfController.toString(), false))
                   medFarmWidgetsForm.Label("CPF inaválido!"),
                 Padding(padding: EdgeInsets.all(10)),
                 Row(
                   children: <Widget>[
                     Flexible(
                         child: Column(
-                          children: <Widget>[
-                            medFarmWidgetsForm.Label("CEP:"),
-                            medFarmWidgetsForm.TextFieldMedFarm(cepController),
-                          ],
-                        )),
+                      children: <Widget>[
+                        medFarmWidgetsForm.Label("CEP:"),
+                        medFarmWidgetsForm.TextFieldMedFarm(cepController),
+                      ],
+                    )),
                     const Padding(padding: EdgeInsets.only(right: 15)),
                     Flexible(
                       child: Column(
@@ -89,11 +93,11 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   children: <Widget>[
                     Flexible(
                         child: Column(
-                          children: <Widget>[
-                            medFarmWidgetsForm.Label("UF:"),
-                            medFarmWidgetsForm.TextFieldMedFarm(stateController),
-                          ],
-                        )),
+                      children: <Widget>[
+                        medFarmWidgetsForm.Label("UF:"),
+                        medFarmWidgetsForm.TextFieldMedFarm(stateController),
+                      ],
+                    )),
                     const Padding(padding: EdgeInsets.only(right: 15)),
                     Flexible(
                       child: Column(
@@ -113,11 +117,12 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   children: <Widget>[
                     Flexible(
                         child: Column(
-                          children: <Widget>[
-                            medFarmWidgetsForm.Label("Especialidade:"),
-                            medFarmWidgetsForm.TextFieldMedFarm(specialtyController),
-                          ],
-                        )),
+                      children: <Widget>[
+                        medFarmWidgetsForm.Label("Especialidade:"),
+                        medFarmWidgetsForm.TextFieldMedFarm(
+                            specialtyController),
+                      ],
+                    )),
                     const Padding(padding: EdgeInsets.only(right: 15)),
                     Flexible(
                       child: Column(
@@ -137,7 +142,46 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                 medFarmWidgetsForm.TextFieldPassword(passwordController),
                 const Padding(padding: EdgeInsets.all(15)),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var MedFarmAPIResponse = new AuthController();
+
+                    var Doctor = new DoctorModel(
+                        stateController.text,
+                        cityController.text,
+                        complementController.text,
+                        districtController.text,
+                        cepController.text,
+                        streetController.text,
+                        int.parse(numberController.text),
+                        nameController.text,
+                        emailController.text,
+                        phoneController.text,
+                        cpfController.text,
+                        specialtyController.text,
+                        crmController.text,
+                        passwordController.text,
+                        "Doctor");
+
+                    var verifyCpf = validarCPF(cpfController.text);
+
+                    if (verifyCpf == false){
+                      medFarmWidgetsForm.ToastMedFarm(
+                          context, "CPF inválido",
+                          false);
+                    }
+                    else {
+                      var verify = await MedFarmAPIResponse.createDoctor(
+                          Doctor);
+
+                      if (verify == true) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (
+                              context) => const Login()),
+                        );
+                      }
+                    }
+                  },
                   child: const Text(
                     "Cadastrar",
                     style: TextStyle(
@@ -145,7 +189,7 @@ class _SignUpDoctorState extends State<SignUpDoctor> {
                   ),
                   style: ButtonStyle(
                     backgroundColor:
-                    const MaterialStatePropertyAll<Color>(Colors.yellow),
+                        const MaterialStatePropertyAll<Color>(Colors.yellow),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
